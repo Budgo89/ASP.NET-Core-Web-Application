@@ -30,7 +30,7 @@ namespace WebApiServis.Logics
             var list = new List<Person>();
             for (int i = skip; i <= take; i++)
             {
-                list.Add(data.Find(x=>x.Id == i));
+                list.Add(data[i]);
             }
 
             return list;
