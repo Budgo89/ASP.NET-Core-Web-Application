@@ -15,11 +15,11 @@ namespace BD
     {
         private const string Connect =
             @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=BDWebApi;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-        public static SqlConnection ConnectionString()
+        public static string ConnectionString()
         {
             //var sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["BDWebApi"].ConnectionString);
-            var sqlConnection = new SqlConnection(Connect);
-            return sqlConnection;
+            //var sqlConnection = new SqlConnection(Connect);
+            return Connect;
         }
 
     }
