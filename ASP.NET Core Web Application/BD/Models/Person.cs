@@ -1,4 +1,4 @@
-﻿namespace Web_API_servis.Models
+﻿namespace BD.Models
 {
     public class Person
     {

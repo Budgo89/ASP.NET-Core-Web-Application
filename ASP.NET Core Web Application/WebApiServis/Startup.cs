@@ -4,9 +4,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using WebApiServis.Logics;
-using WebApiServis.Repository;
-
 namespace WebApiServis
 {
     public class Startup
@@ -25,12 +22,12 @@ namespace WebApiServis
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApiServis", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo {Title = "WebApiServis", Version = "v1"});
             });
-            services.AddSingleton<PersonsRepository>();
-            services.AddSingleton<PersonLogic>();
+            //services.AddSingleton<PersonsRepository>();
+            //services.AddSingleton<PersonLogic>();
         }
-
+        
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
