@@ -1,47 +1,65 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using BD.Models;
 using BD.Repositorys;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using WebApiServis.Interfaces;
+using WebApiServis.Token;
 
 namespace WebApiServis.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("controller/Users")]
-    public class UsersController : ControllerBase
+    public sealed class UsersController : ControllerBase
     {
-        private readonly ILogger<UsersController> _logger;
-        private readonly RepositoryUsers _repository;
+        private readonly IUserService _userService;
 
-        public UsersController(ILogger<UsersController> iLogger)
+        public UsersController(IUserService userService)
         {
-            _logger = iLogger;
-            _repository =  new RepositoryUsers();
+            _userService = userService;
+        }
+        [AllowAnonymous]
+        [HttpPost("authenticate")]
+        public IActionResult Authenticate([FromQuery] string user, string password)
+        {
+            TokenResponse token = _userService.Authenticate(user, password);
+            if (token is null)
+            {
+                return BadRequest(new { message = "Username or password is incorrect" });
+            }
+            SetTokenCookie(token.RefreshToken);
+            return Ok(token);
         }
 
-        [HttpGet("{id}")]
-        public Task<Users> GetEmployees([FromRoute] int id)
+        [Authorize]
+        [HttpPost("refresh-token")]
+        public IActionResult Refresh()
         {
-            return null;
+            string oldRefreshToken = Request.Cookies["refreshToken"];
+            string newRefreshToken = _userService.RefreshToken(oldRefreshToken);
+
+            if (string.IsNullOrWhiteSpace(newRefreshToken))
+            {
+                return Unauthorized(new { message = "Invalid token" });
+            }
+            SetTokenCookie(newRefreshToken);
+            return Ok(newRefreshToken);
+        }
+        private void SetTokenCookie(string token)
+        {
+            var cookieOptions = new CookieOptions
+            {
+                HttpOnly = true,
+                Expires = DateTime.UtcNow.AddDays(7)
+            };
+            Response.Cookies.Append("refreshToken", token, cookieOptions);
         }
 
-        [HttpPost("Users")]
-        public Task<List<Users>> PostEmployees([FromBody] Users users)
-        {
-            return null;
-        }
-
-        [HttpPut("Users")]
-        public async Task PutEmployees([FromBody] Users users)
-        {
-            await _repository.AddUsers(users);
-        }
-
-        [HttpDelete("{id}")]
-        public Task DeleteEmployees([FromRoute] string id)
-        {
-            return null;
-        }
     }
+
 }

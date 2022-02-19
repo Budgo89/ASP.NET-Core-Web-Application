@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using BD.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace WebApiServis.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("controller/Employees")]
     public class EmployeesController : ControllerBase
     {
