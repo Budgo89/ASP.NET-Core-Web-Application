@@ -40,15 +40,8 @@ namespace BD.Repositorys
                 sqlConnection.Open();
                 SqlCommand cmd = new SqlCommand(SqlExpressionSelectId, sqlConnection);
                 cmd.Parameters.Add(new SqlParameter("@Id", id));
-                //var a = cmd.ExecuteReader();
                 SqlDataReader reader = cmd.ExecuteReader();
                 sqlConnection.Close();
-                var a = new Employees()
-                {
-                    Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                    UserId = reader.GetInt32(reader.GetOrdinal("UserId")),
-                    Name = reader.GetString(reader.GetOrdinal("Name"))
-                };
 
                 return new Employees()
                 {
@@ -57,7 +50,6 @@ namespace BD.Repositorys
                     Name = reader.GetString(reader.GetOrdinal("Name"))
                 };
             }
-            return null;
         }
 
         public Task<Employees> PostEmployees(string name)

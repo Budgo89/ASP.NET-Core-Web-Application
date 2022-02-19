@@ -40,7 +40,7 @@ namespace WebApiServis.Controllers
         }
 
         [HttpDelete("{id}")]
-        public Task DeleteEmployees([FromRoute] Employees employees)
+        public Task DeleteEmployees([FromRoute] int id)
         {
             return null;
         }
