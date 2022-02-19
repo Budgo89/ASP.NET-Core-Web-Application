@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using BD.Models;
 using BD.Repositorys;
@@ -21,13 +23,13 @@ namespace WebApiServis.Controllers
         }
 
         [HttpGet("{id}")]
-        public Task<Employees> GetEmployees([FromRoute] int id)
+        public Task<Employees> GetEmployees([Range(1, int.MaxValue)][FromRoute] int id)
         {
             return _repositoryEmployees.GetEmployees(id);
         }
 
         [HttpPost("{idUser}")]
-        public Task<Employees> PostEmployees([FromBody] int idUser)
+        public Task<Employees> PostEmployees([Range(1, int.MaxValue)][FromRoute] int idUser)
         {
             return null;
         }
@@ -40,7 +42,7 @@ namespace WebApiServis.Controllers
         }
 
         [HttpDelete("{id}")]
-        public Task DeleteEmployees([FromRoute] Employees employees)
+        public Task DeleteEmployees([Range(1, int.MaxValue)][FromRoute] int id)
         {
             return null;
         }
