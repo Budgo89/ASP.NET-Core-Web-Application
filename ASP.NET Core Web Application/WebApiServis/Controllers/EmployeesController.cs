@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using BD.Models;
+using BD.Repositorys;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -11,28 +12,31 @@ namespace WebApiServis.Controllers
     public class EmployeesController : ControllerBase
     {
         private readonly ILogger<EmployeesController> _logger;
+        private readonly RepositoryEmployees _repositoryEmployees;
 
         public EmployeesController(ILogger<EmployeesController> iLogger)
         {
             _logger = iLogger;
+            _repositoryEmployees = new RepositoryEmployees();
         }
 
         [HttpGet("{id}")]
         public Task<Employees> GetEmployees([FromRoute] int id)
         {
-            return null;
+            return _repositoryEmployees.GetEmployees(id);
         }
 
-        [HttpPost("Employees")]
-        public Task<List<Employees>> PostEmployees([FromBody] Employees employees)
+        [HttpPost("{idUser}")]
+        public Task<Employees> PostEmployees([FromBody] int idUser)
         {
             return null;
         }
 
         [HttpPut("Employees")]
-        public Task PutEmployees([FromBody] Employees employees)
+        public async Task<string> PutEmployees([FromBody] Employees employees)
         {
-            return null;
+            await _repositoryEmployees.AddEmployees(employees);
+            return "Ok";
         }
 
         [HttpDelete("{id}")]
