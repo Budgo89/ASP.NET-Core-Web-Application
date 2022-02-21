@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Web_API_servis.Models;
@@ -6,7 +7,7 @@ using WebApiServis.Repository;
 
 namespace WebApiServis.Logics
 {
-    public class PersonLogic
+    public class PersonLogic : ILogic
     {
         private List<Person> data;
 
@@ -17,7 +18,13 @@ namespace WebApiServis.Logics
 
         public async Task<Person> GetPersonsId(int id)
         {
-            return data.Find(x => x.Id == id);
+            var person = data.Find(x => x.Id == id);
+            if (person != null)
+            {
+                return person;
+            }
+
+            return new Person();
         }
 
         public async Task<Person> FindPersonsName(string name)
@@ -40,7 +47,6 @@ namespace WebApiServis.Logics
         {
             var persons = new Person()
             {
-                Id = GetId(person).Result,
                 Age = person.Age,
                 Company = person.Company,
                 Email = person.Email,
@@ -50,7 +56,7 @@ namespace WebApiServis.Logics
             data.Add(persons);
         }
 
-        public async Task<string> UpdatePersons(Person person)
+        public async Task UpdatePersons(Person person)
         {
             
             if (data.Exists(x => x.Id == person.Id))
@@ -60,9 +66,8 @@ namespace WebApiServis.Logics
                 persons.Result.Company = person.Company;
                 persons.Result.FirstName = person.FirstName;
                 persons.Result.LastName = person.LastName;
-                return "Обновлено";
             }
-            return "Элемент не найден";
+            else new Exception("Элемент не найден");
         }
 
         public async Task DeletePersons(int id)
@@ -73,17 +78,6 @@ namespace WebApiServis.Logics
                 data.Remove(persons.Result);
             }
             return;
-        }
-
-        private async Task<int> GetId(Person person)
-        {
-            var idMax = data.Max(x => x.Id);
-            if (data.Exists(x => x.Id == person.Id))
-            {
-                return idMax + 1;
-            }
-
-            return person.Id;
         }
     }
 }

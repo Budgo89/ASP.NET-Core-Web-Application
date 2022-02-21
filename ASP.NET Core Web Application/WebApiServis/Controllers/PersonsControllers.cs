@@ -46,9 +46,9 @@ namespace Web_API_servis.Controllers
         }
 
         [HttpPut("persons")]
-        public Task<string> PutUpdatePersons([FromBody] Person persons)
+        public async Task PutUpdatePersons([FromBody] Person persons)
         {
-            return _personLogic.UpdatePersons(persons);
+            await _personLogic.UpdatePersons(persons);
         }
 
         [HttpDelete("persons/{id}")]
