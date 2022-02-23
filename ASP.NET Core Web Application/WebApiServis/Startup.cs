@@ -1,3 +1,4 @@
+using BD.Repositorys;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -26,6 +27,7 @@ namespace WebApiServis
             });
             //services.AddSingleton<PersonsRepository>();
             //services.AddSingleton<PersonLogic>();
+            services.AddSingleton<RepositoryEmployees>();
         }
         
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

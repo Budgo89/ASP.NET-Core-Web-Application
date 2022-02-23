@@ -14,34 +14,34 @@ namespace WebApiServis.Controllers
         private readonly ILogger<EmployeesController> _logger;
         private readonly RepositoryEmployees _repositoryEmployees;
 
-        public EmployeesController(ILogger<EmployeesController> iLogger)
+        public EmployeesController(ILogger<EmployeesController> iLogger, RepositoryEmployees repositoryEmployees)
         {
             _logger = iLogger;
-            _repositoryEmployees = new RepositoryEmployees();
+            _repositoryEmployees = repositoryEmployees;
         }
-
+        
         [HttpGet("{id}")]
         public Task<Employees> GetEmployees([FromRoute] int id)
         {
             return _repositoryEmployees.GetEmployees(id);
         }
 
-        [HttpPost("{idUser}")]
-        public Task<Employees> PostEmployees([FromBody] int idUser)
+        [HttpPost("{name}")]
+        public Task<Employees> PostEmployees([FromRoute] string name)
         {
-            return null;
+            return _repositoryEmployees.PostEmployees(name);
         }
 
         [HttpPut("Employees")]
-        public async Task<string> PutEmployees([FromBody] Employees employees)
+        public async Task<bool> PutEmployees([FromBody] Employees employees)
         {
-            await _repositoryEmployees.AddEmployees(employees);
-            return "Ok";
+            return _repositoryEmployees.Add(employees);
         }
 
         [HttpDelete("{id}")]
         public Task DeleteEmployees([FromRoute] int id)
         {
+            _repositoryEmployees.DeleteEmployees(id);
             return null;
         }
     }
