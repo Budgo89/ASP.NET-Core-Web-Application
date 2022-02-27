@@ -54,6 +54,18 @@ namespace BD.Repositorys
                 throw new Exception("Такого ID нет");
             }
         }
+        public Task<Employees> GetEmployeesUserid(int Userid)
+        {
+            try
+            {
+                var res = _context.Employees.Single(x => x.UserId == Userid);
+                return Task.FromResult(res);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Такого ID нет");
+            }
+        }
 
         public Task<Employees> PostEmployees(string name)
         {

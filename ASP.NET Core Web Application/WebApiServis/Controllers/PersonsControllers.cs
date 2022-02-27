@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using BD.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Web_API_servis.Models;
 using WebApiServis.Logics;
 
 namespace Web_API_servis.Controllers
@@ -21,7 +21,7 @@ namespace Web_API_servis.Controllers
             _personLogic = personLogic;
         }
 
-        [HttpGet("persons/{id}")]
+        [HttpGet("persons/{Id}")]
         public Task<Person> GetPersonsId([FromRoute] int id)
         {
             return _personLogic.GetPersonsId(id);
@@ -51,7 +51,7 @@ namespace Web_API_servis.Controllers
             await _personLogic.UpdatePersons(persons);
         }
 
-        [HttpDelete("persons/{id}")]
+        [HttpDelete("persons/{Id}")]
         public async Task DeletePersons([FromRoute] int id)
         {
             await _personLogic.DeletePersons(id);

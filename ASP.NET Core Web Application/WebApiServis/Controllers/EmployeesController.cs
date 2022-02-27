@@ -20,7 +20,7 @@ namespace WebApiServis.Controllers
             _repositoryEmployees = repositoryEmployees;
         }
         
-        [HttpGet("{id}")]
+        [HttpGet("{Id}")]
         public Task<Employees> GetEmployees([FromRoute] int id)
         {
             return _repositoryEmployees.GetEmployees(id);
@@ -38,7 +38,7 @@ namespace WebApiServis.Controllers
             return _repositoryEmployees.Add(employees);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{Id}")]
         public Task DeleteEmployees([FromRoute] int id)
         {
             _repositoryEmployees.DeleteEmployees(id);
