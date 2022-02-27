@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BD", "BD\BD.csproj", "{7FE6
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{2F0CB17B-338E-4DCB-827E-4BADE3FFCB3C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiServis", "WebApiServis\WebApiServis.csproj", "{C0E3229A-E7B6-4213-9368-B1D0B8BDA4A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiServis", "WebApiServis\WebApiServis.csproj", "{C0E3229A-E7B6-4213-9368-B1D0B8BDA4A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestLogic", "TestLogic\TestLogic.csproj", "{7A9DE0F9-B630-44F1-9885-338C727D98C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{C0E3229A-E7B6-4213-9368-B1D0B8BDA4A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0E3229A-E7B6-4213-9368-B1D0B8BDA4A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0E3229A-E7B6-4213-9368-B1D0B8BDA4A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A9DE0F9-B630-44F1-9885-338C727D98C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A9DE0F9-B630-44F1-9885-338C727D98C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A9DE0F9-B630-44F1-9885-338C727D98C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A9DE0F9-B630-44F1-9885-338C727D98C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -10,6 +10,11 @@ namespace BusinessLogic.Logics
         private RepositoryEmployees _repositoryEmployees;
         private RepositoryAccounts _repositoryAccounts;
 
+        public AccountsLogic(RepositoryEmployees repositoryEmployees, RepositoryAccounts repositoryAccounts)
+        {
+            _repositoryEmployees = repositoryEmployees;
+            _repositoryAccounts = repositoryAccounts;
+        }
         public AccountsLogic()
         {
             _repositoryEmployees = new RepositoryEmployees();
