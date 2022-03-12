@@ -13,13 +13,14 @@ namespace BD
 {
     public static class ConnectHelper
     {
-        private const string Connect =
-            @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=BDWebApi;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        //private const string Connect =
+        //    @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=BDWebApi;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         public static string ConnectionString()
         {
             //var sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["BDWebApi"].ConnectionString);
+            var connect = ConfigurationManager.ConnectionStrings["BDWebApi"].ConnectionString;
             //var sqlConnection = new SqlConnection(Connect);
-            return Connect;
+            return connect;
         }
 
     }

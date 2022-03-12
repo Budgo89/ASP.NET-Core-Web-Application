@@ -35,7 +35,7 @@ namespace WebApiServis.Controllers
         [HttpPut("Employees")]
         public async Task<bool> PutEmployees([FromBody] Employees employees)
         {
-            return _repositoryEmployees.Add(employees);
+            return await _repositoryEmployees.Add(employees);
         }
 
         [HttpDelete("{id}")]

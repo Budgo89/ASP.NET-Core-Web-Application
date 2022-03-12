@@ -21,7 +21,7 @@ namespace BD.Repositorys
             _context = new EmployeesDbContext();
         }
 
-        public bool Add(Employees employees)
+        public async Task< bool> Add(Employees employees)
         {
             try
             {
